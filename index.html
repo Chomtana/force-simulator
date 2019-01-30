@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="cache-control" content="no-cache">
+<link href="css/font-face.css" rel="stylesheet" />
+<link href="css/reset.css" rel="stylesheet" />
+<link href="css/index.css" rel="stylesheet" />
+<link href="images/icon.ico" rel="shortcut icon" />
+<script src="script/jquery.js"></script>
+<script src="script/cloud.js" type="text/javascript"></script>
+<script src="script/orientation.js" type="text/javascript"></script>
+<title>สื่อจำลองการทำงานของเครื่องกล</title>
+</head>
+
+<body onLoad="window.scroll(0,0);">
+
+<div id="wrapper">
+	<!--<header id="header">
+		<h1><a id="logo" href="index.html#home">สุขอนามัยทางเพศ</a></h1>
+  </header>-->
+	<header id="testheader">
+		
+	</header>
+	<section class="container">
+		<!-- intro -->
+		<div id="intro" align="center">
+			<video id="introvideo" src="video/intro.mp4" onEnded="introend();"></video>
+			<!--<img class="loading" src="images/loading.jpg">-->
+			<!--<audio id="introvideosound" src="sound/intro.mp3" onEnded="introsound();"></audio>-->
+            <!--<audio id="introsound" src="sound/sound4.mp3" onEnded="introend();"></audio>-->
+		</div>
+		<!-- menu -->
+		<div id="home" class="slide slide-sub">
+			<h2>เมนูหลัก</h2>
+<nav>
+				<a class="menu fst" href="#objective"><span id="m"><div class="img"></div></span>จุดประสงค์ของการเรียนรู้<span>&nbsp;</span></a>
+				<a class="menu" href="#help"><span id="m"><div class="img"></div></span>วิธีการใช้งาน<span>&nbsp;</span></a>
+				<a class="menu" href="#learning"><span id="m"><div class="img"></div></span>เนื้อหา<span>&nbsp;</span></a>
+				<a class="menu" href="main.html"><span id="m"><div class="img"></div></span>เข้าสู่โปรแกรม<span>&nbsp;</span></a>
+			</nav>
+		</div>
+		<!-- จุดประสงค์ -->
+		<div id="objective" class="slide">
+			<h2>จุดประสงค์ของการเรียนรู้</h2>
+      <a class="back" href="#home">ย้อนกลับ</a>
+			<div id="objtext">
+<ol>
+<li>เพื่อศึกษาหลักการทำงานของสื่อจำลองการทำงานของเครื่องกลโดยเว็บไซต์</li>
+<li>เพื่อศึกษาประสิทธิภาพของสื่อจำลองการทำงานของเครื่องกลโดยเว็บไซต์</li>
+</ol>
+			</div>
+		</div>
+		<!-- help -->
+		<div id="help" class="slide">
+			<h2>วิธีการใช้งาน</h2>
+			<a class="back" href="#home">ย้อนกลับ</a>
+			<iframe class="pdf" src="pdf/help.pdf"></iframe>
+		</div>
+		<!-- เนื้อหา -->
+		<div id="learning" class="slide">
+			<h2>เนื้อหา</h2>
+			 <a class="back" href="#home">ย้อนกลับ</a>
+			 <iframe class="pdf" src="pdf/learning.pdf"></iframe>
+		</div>
+	</section>
+</div>
+<div class="skipintro" onClick="introend();">ข้าม</div>
+
+<script type="text/javascript">
+
+	function playsound1() {
+		var sound = document.getElementById("sound1");
+		sound.play();
+	}
+	
+	function playsound2() {
+		var sound = document.getElementById("sound2");
+		sound.play();
+	}
+	
+	function hidescroll() {
+		$('html').css('overflow','hidden');
+		$('body').css('position','fixed');
+	}
+	
+	function showscroll() {
+		$('html').css('overflow','auto');
+		$('body').css('position','relative');
+	}
+	
+	function homenav() {
+		showscroll();
+		setTimeout(function(){scroll(0,0);},1);
+	}
+	
+	function learningnav() {
+		playsound1();
+		hidescroll();
+		setTimeout(function(){scroll(0,0);},1);
+	}
+	
+	function menunav() {
+		playsound2();
+		showscroll();
+		setTimeout(function(){scroll(0,0);},1);
+	}
+	
+	function introsound () {
+		var sound = document.getElementById("introsound");
+		sound.play();
+	}
+	
+	function introend () {
+		$("#intro").css("display","none");
+		window.location = "#home";
+		showscroll();
+		onload();
+		$(".skipintro").css("display","none");
+		document.getElementById("introvideo").pause();
+	}
+	
+	function intro() {
+		hidescroll();
+		$("#intro").css("display","block");
+		document.getElementById("introvideo").play();
+		$(".skipintro").css("display","block");
+	}
+	
+	$(".back,.male,.female,.btl,#logo,.slide-sub nav a").click(function (e) {setTimeout(function(){onload();},100);});
+	//$(".btl,#logo").click(function (e) {learningnav();});
+	
+	function loadpage (hash) {
+		$(".content").remove();
+		/*$.get("pages/"+hash+".html",function (data) {
+			$("#"+hash).html(data);
+			$(".back").click(function (e) {setTimeout(function(){onload();},1);});
+		});*/
+		$("#"+hash).html(getpagedata(hash));
+		$(".back").click(function (e) {setTimeout(function(){onload();},100);});
+		showscroll();
+		scroll(0,0);
+	}
+	
+	function onload () {
+	
+	//	console.log("sadaa");
+		
+		if (window.location.hash) {
+			switch (window.location.hash.substring(1)) {
+				case "home": homenav(); break;
+				case "intro": intro(); break;
+				//case "learning": learningnav(); break;
+				case "male": case "female": menunav(); break;
+				case "male1": case "male2": case "male3": case "male4": case "female1": case "female2": case "female3": case "female4": case "test": loadpage(window.location.hash.substring(1)); break;
+			}
+			
+			if (window.location.hash.substring(1) != "intro") {
+				$("#intro").css("display","none");
+			}
+			
+			//$("h2 div").remove();
+			try {
+				$("#"+window.location.hash.substring(1)+" h2").html('<div>'+$("#"+window.location.hash.substring(1)+" h2").html().replace("<div>","").replace("</div>","")+'</div>');
+			} catch (e) {}
+		} else {
+			window.location = '#intro';
+			//location.reload();
+			intro();
+			//introend();
+		}
+
+		if (window.location.hash.substring(1) == "test") {
+			$("#header").animate({opacity:0},500);
+			$("#testheader").animate({opacity:1},500);
+		} else {
+			$("#header").animate({opacity:1},500);
+			$("#testheader").animate({opacity:0},500);
+		}
+	
+	}
+	
+	onload();
+	
+	try {
+		$("#"+window.location.hash.substring(1)+" h2").html('<div>'+$("#"+window.location.hash.substring(1)+" h2").html().replace("<div>","").replace("</div>","")+'</div>');
+	} catch (e) {}
+	
+	//Block back
+    if (typeof history.pushState === "function") {
+        history.pushState("jibberish", null, null);
+        window.onpopstate = function () {
+            history.pushState('newjibberish', null, null);
+        };
+    }
+	
+	//Intro
+	/*function intro() {
+		$("#intro .loading").css("display","block");
+		hidescroll();
+		$("#intro").prepend('<img src="video/intro.gif" id="preloadintro">');
+		$("#preloadintro").load(function(e) {
+			$("#intro .loading").remove();
+			$(this).remove();
+			$("#intro").prepend('<img src="video/intro.gif" id="introvideo">');
+			var sound = document.getElementById("introvideosound");
+			sound.play()
+			setTimeout(function () {
+				introend();
+			},11000);
+			$(window).trigger("resize");
+		});
+	}*/
+	
+	
+	function getpagedata (hash) {
+
+	}
+
+</script>
+
+</body>
+
+</html>

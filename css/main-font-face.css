@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'LayijiMaHaNiYomV15Regular';
+    src: url('../fonts/layijimahaniyomv105-webfont.eot');
+    src: url('../fonts/layijimahaniyomv105-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/layijimahaniyomv105-webfont.woff') format('woff'),
+         url('../fonts/layijimahaniyomv105-webfont.ttf') format('truetype'),
+         url('../fonts/layijimahaniyomv105-webfont.svg#LayijiMaHaNiYomV15Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
